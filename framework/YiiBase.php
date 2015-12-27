@@ -428,8 +428,12 @@ class YiiBase
 						}
 					}
 				}
-				else
-					include($className.'.php');
+				else {
+					$err_lvl = error_reporting(0);
+					$included = include($className.'.php');
+					error_reporting($lvl);
+					return $included;
+				}
 			}
 			else  // class name with namespace in PHP 5.3
 			{
